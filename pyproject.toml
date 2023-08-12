@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "buyme-automation-project"
+version = "0.1.0"
+description = ""
+authors = ["Melman11 <nivisraeli999@gmail.com>"]
+readme = "README.md"
+packages = [{include = "buyme_automation_project"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+selenium = "^4.11.2"
+selenium-page-factory = "^2.6"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
