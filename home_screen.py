@@ -1,7 +1,7 @@
 from seleniumpagefactory.Pagefactory import PageFactory
 
 
-# This class holds all the functions for the
+# This class holds all the functions for the home screen
 class HomeScreen(PageFactory):
     def __init__(self, driver):
         self.driver = driver
