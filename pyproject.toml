@@ -10,6 +10,8 @@ packages = [{include = "buyme_automation_project"}]
 python = "^3.10"
 selenium = "^4.11.2"
 selenium-page-factory = "^2.6"
+allure-pytest = "^2.13.2"
+
 
 
 [build-system]
