@@ -4,7 +4,7 @@ from allure_commons.types import AttachmentType
 
 
 # This class holds all the functions for the
-class PickBusiness(PageFactory):
+class SenderReceiver(PageFactory):
 
     def __init__(self, driver):
         self.driver = driver
