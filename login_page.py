@@ -2,15 +2,17 @@ from seleniumpagefactory.Pagefactory import PageFactory
 import allure
 from allure_commons.types import AttachmentType
 
+
 # This class holds all the functions for the login page
 class LoginPage(PageFactory):
     def __init__(self, driver):
         self.driver = driver
+
     # locators for the webelements in the login page
     locators = {
         'LoginLink': ('XPATH', '//*[@id="ember1005"]/div/ul[1]/li[3]/a'),
-        'Register': ('XPATH','//*[@id="ember965"]/div/div[1]/div[2]/div/div[3]/div[1]/span'),
-        'Name':('XPATH','//*[@id="ember1796"]'),
+        'Register': ('XPATH', '//*[@id="ember965"]/div/div[1]/div[2]/div/div[3]/div[1]/span'),
+        'Name': ('XPATH', '//*[@id="ember1796"]'),
         'EnterEmail': ('XPATH', '//*[@id="ember1803"]'),
         'EnterPassword': ('XPATH', '//*[@id="valPass"]'),
         'ValPassword': ('XPATH', '//*[@id="ember1817"]'),
@@ -19,41 +21,28 @@ class LoginPage(PageFactory):
 
     }
 
-    # set email and password and logs in to the website
-    # takes screenshots and adds them to the allure
-    def enter_credentials(self):
+    # this function adds an allure report screenshot as an exception for every click_button() command
+    def safe_click(self, element, screenshot_name):
         try:
-            self.LoginLink.click_button() # clicks the enter/register button
-        except :
-            allure.attach(self.driver.get_screenshot_as_png(), name="LoginLinkScreenshot", attachment_type=AttachmentType.PNG)
-        try:
-            self.Register.click_button() # clicks the register button
+            element.click_button()
         except:
-            allure.attach(self.driver.get_screenshot_as_png(), name="RegisterScreenshot",
+            allure.attach(self.driver.get_screenshot_as_png(), name=screenshot_name,
                           attachment_type=AttachmentType.PNG)
-        try:
-            self.Name.set_text("tester") # enters a name
-        except:
-            allure.attach(self.driver.get_screenshot_as_png(), name="NameScreenshot", attachment_type=AttachmentType.PNG)
 
+    # this function adds an allure report screenshot as an exception for every set_text() command
+    def safe_set_text(self, element, text, screenshot_name):
         try:
-            self.EnterEmail.set_text("wodocir727@weishu8.com") # enters an email
+            element.set_text(text)
         except:
-            allure.attach(self.driver.get_screenshot_as_png(), name="EnterEmailScreenshot", attachment_type=AttachmentType.PNG)
-        try:
-            self.EnterPassword.set_text("Tester123") # enters a password
-        except:
-            allure.attach(self.driver.get_screenshot_as_png(), name="EnterPasswordScreenshot", attachment_type=AttachmentType.PNG)
-        try:
-            self.ValPassword.set_text("Tester123") # validate the password
-        except:
-            allure.attach(self.driver.get_screenshot_as_png(), name="ValPasswordScreenshot", attachment_type=AttachmentType.PNG)
-        try:
-            self.AgreeToPolicy.click_button() # agrees to site policy
-        except:
-            allure.attach(self.driver.get_screenshot_as_png(), name="AgreeToPolicyScreenshot", attachment_type=AttachmentType.PNG)
-        try:
-            self.EnterBuyMe.click_button() # register to the website
-        except:
-            allure.attach(self.driver.get_screenshot_as_png(), name="EnterBuyMeScreenshot", attachment_type=AttachmentType.PNG)
+            allure.attach(self.driver.get_screenshot_as_png(), name=screenshot_name,
+                          attachment_type=AttachmentType.PNG)
 
+    def enter_credentials(self):
+        self.safe_click(self.LoginLink, "LoginLinkScreenshot")  # clicks the login link
+        self.safe_click(self.Register, "RegisterScreenshot")  # clicks the register button
+        self.safe_set_text(self.Name, "tester", "NameScreenshot")  # enters name
+        self.safe_set_text(self.EnterEmail, "wodocir727@weishu8.com", "EnterEmailScreenshot")  # enters email
+        self.safe_set_text(self.EnterPassword, "Tester123", "EnterPasswordScreenshot")  # enters password
+        self.safe_set_text(self.ValPassword, "Tester123", "ValPasswordScreenshot")  # validates password
+        self.safe_click(self.AgreeToPolicy, "AgreeToPolicyScreenshot")  # agrees to site policy
+        self.safe_click(self.EnterBuyMe, "EnterBuyMeScreenshot")  # enters the site

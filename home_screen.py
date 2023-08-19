@@ -17,51 +17,30 @@ class HomeScreen(PageFactory):
         'Area': ('XPATH', '//*[@id="ember1207"]'),
         'Category': ('XPATH', '//*[@id="ember1268"]'),
         'Search': ('XPATH', '//*[@id="ember1295"]')
-
     }
 
-    # pick a price from the price dropdown
+    # this function adds an allure report screenshot as an exception for every click_button() command
+    def safe_click(self, element, screenshot_name):
+        try:
+            element.click_button()
+        except:
+            allure.attach(self.driver.get_screenshot_as_png(), name=screenshot_name,
+                          attachment_type=AttachmentType.PNG)
+
+    # choose desired price from the dropdown
     def set_price(self):
-        try:
-            self.priceDropDown.click_button()  # cliks on the dropdown for price range
-        except:
-            allure.attach(self.driver.get_screenshot_as_png(), name="PriceDropDownScreenshot",
-                          attachment_type=AttachmentType.PNG)
-        try:
-            self.PriceRange.click_button()  # clicks on the desired price
-        except:
-            allure.attach(self.driver.get_screenshot_as_png(), name="PriceRangeScreenshot",
-                          attachment_type=AttachmentType.PNG)
+        self.safe_click(self.PriceDropDown, "PriceDropDownScreenshot")
+        self.safe_click(self.PriceRange, "PriceRangeScreenshot")
 
-    # pick an area from the area dropdown
+    # set desired area from the dropdown
     def set_area(self):
-        try:
-            self.AreaDropDown.click_button()  # cliks on the dropdown for area
-        except:
-            allure.attach(self.driver.get_screenshot_as_png(), name="AreaDropDownScreenshot",
-                          attachment_type=AttachmentType.PNG)
-        try:
-            self.Area.click_button()  # clicks on the desired area
-        except:
-            allure.attach(self.driver.get_screenshot_as_png(), name="AreaDownScreenshot",
-                          attachment_type=AttachmentType.PNG)
+        self.safe_click(self.AreaDropDown, "AreaDropDownScreenshot")
+        self.safe_click(self.Area, "AreaDownScreenshot")
 
-    #  pick a category from the category dropdown
+    # set desired category from the dropdown
     def set_category(self):
-        try:
-            self.CategoryDropDown.click_button()  # cliks on the dropdown for category
-        except:
-            allure.attach(self.driver.get_screenshot_as_png(), name="CategoryDropDownScreenshot",
-                          attachment_type=AttachmentType.PNG)
-        try:
-            self.Category.click_button()  # clicks on the desired category
-        except:
-            allure.attach(self.driver.get_screenshot_as_png(), name="CategoryScreenshot",
-                          attachment_type=AttachmentType.PNG)
+        self.safe_click(self.CategoryDropDown, "CategoryDropDownScreenshot")
+        self.safe_click(self.Category, "CategoryScreenshot")
 
-    # click the search button
     def search(self):
-        try:
-            self.Search.click_button()
-        except:
-            allure.attach(self.driver.get_screenshot_as_png(), name="SearchScreenshot", attachment_type=AttachmentType.PNG)
+        self.safe_click(self.Search, "SearchScreenshot")
