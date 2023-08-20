@@ -17,7 +17,12 @@ class SenderReceiver(PageFactory):
         'CleanAll': ('XPATH', '//*[@id="ember1483"]/span[2]'),
         'TextBox': ('XPATH', '//*[@id="ember1483"]/textarea'),
         'UploadPicture': ('XPATH', '//*[@id="ember1491"]'),
-        'ContinueButton': ('XPATH', '//*[@id="ember1493"]')
+        'ContinueButton': ('XPATH', '//*[@id="ember1493"]'),
+        'ChooseEmail': ('XPATH', '//*[@id="ember2248"]/div[2]'),
+        'ReceiverEmail': ('XPATH', '//*[@id="email"]'),
+        'SenderName': ('XPATH', '//*[@id="ember2268"]'),
+        'ContinueToPayment': ('XPATH', '//*[@id="ember2273"]')
+
     }
 
     # this function adds an allure report screenshot as an exception for every click_button() command
@@ -56,3 +61,10 @@ class SenderReceiver(PageFactory):
         except:
             allure.attach(self.driver.get_screenshot_as_png(), name="UploadPictureScreenshot",
                           attachment_type=AttachmentType.PNG)
+
+    def enter_email(self):
+        self.safe_click(self.ChooseEmail, "ChooseEmailScreenshot")
+        self.safe_set_text(self.ReceiverEmail, "wodocir787@weishu8.com", "ReceiverEmailScreenshot")
+        self.SenderName.clear_text()
+        self.safe_set_text(self.SenderName, "Niv", "SenderNameScreenshot")
+        self.safe_click(self.ContinueToPayment, "ContinueToPaymentScreenshot")

@@ -65,3 +65,4 @@ def test_sender_receiver_info(setUp):
     sender_receiver_info = SenderReceiver(driver)
     sender_receiver_info.gift_receiver()
     sender_receiver_info.upload_picture()
+    sender_receiver_info.enter_email()

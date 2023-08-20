@@ -19,6 +19,7 @@ class LoginPage(PageFactory):
         'AgreeToPolicy': ('XPATH', '//*[@id="ember1823"]/div/span[1]/svg/circle'),
         'EnterBuyMe': ('XPATH', '//*[@id="ember1827"]'),
 
+
     }
 
     # this function adds an allure report screenshot as an exception for every click_button() command
