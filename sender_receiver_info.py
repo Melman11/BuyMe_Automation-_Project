@@ -62,9 +62,10 @@ class SenderReceiver(PageFactory):
             allure.attach(self.driver.get_screenshot_as_png(), name="UploadPictureScreenshot",
                           attachment_type=AttachmentType.PNG)
 
+    # enters receivers email and sender name
     def enter_email(self):
-        self.safe_click(self.ChooseEmail, "ChooseEmailScreenshot")
-        self.safe_set_text(self.ReceiverEmail, "wodocir787@weishu8.com", "ReceiverEmailScreenshot")
-        self.SenderName.clear_text()
-        self.safe_set_text(self.SenderName, "Niv", "SenderNameScreenshot")
-        self.safe_click(self.ContinueToPayment, "ContinueToPaymentScreenshot")
+        self.safe_click(self.ChooseEmail, "ChooseEmailScreenshot")  # Chose to use email
+        self.safe_set_text(self.ReceiverEmail, "wodocir787@weishu8.com", "ReceiverEmailScreenshot")  # enters email
+        self.SenderName.clear_text()  # clears textbox
+        self.safe_set_text(self.SenderName, "Niv", "SenderNameScreenshot")  # enters sender name
+        self.safe_click(self.ContinueToPayment, "ContinueToPaymentScreenshot")  # proceed to payment
